@@ -1,0 +1,89 @@
+<canvas id="pongCanvas" width="800" height="400"></canvas>
+<script>
+const canvas = document.getElementById('pongCanvas');
+const ctx = canvas.getContext('2d');
+
+let paddleWidth = 10, paddleHeight = 80, ballRadius = 10;
+let playerY = canvas.height / 2 - paddleHeight / 2, aiY = playerY;
+let playerScore = 0, aiScore = 0;
+let ballX = canvas.width / 2, ballY = canvas.height / 2;
+let ballSpeedX = 4, ballSpeedY = 4;
+let upPressed = false, downPressed = false;
+
+function drawRect(x, y, w, h, color) {
+  ctx.fillStyle = color;
+  ctx.fillRect(x, y, w, h);
+}
+
+function drawCircle(x, y, r, color) {
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function movePaddles() {
+  if (upPressed && playerY > 0) playerY -= 6;
+  if (downPressed && playerY + paddleHeight < canvas.height) playerY += 6;
+
+  aiY += (ballY - (aiY + paddleHeight / 2)) * 0.1;  // AI movement
+}
+
+function moveBall() {
+  ballX += ballSpeedX;
+  ballY += ballSpeedY;
+
+  if (ballY - ballRadius < 0 || ballY + ballRadius > canvas.height) {
+    ballSpeedY = -ballSpeedY;  // Bounce off top/bottom
+  }
+
+  if (ballX - ballRadius < paddleWidth && ballY > playerY && ballY < playerY + paddleHeight) {
+    ballSpeedX = -ballSpeedX;  // Bounce off player paddle
+  }
+
+  if (ballX + ballRadius > canvas.width - paddleWidth && ballY > aiY && ballY < aiY + paddleHeight) {
+    ballSpeedX = -ballSpeedX;  // Bounce off AI paddle
+  }
+
+  if (ballX - ballRadius < 0) {
+    aiScore++;
+    resetBall();
+  }
+
+  if (ballX + ballRadius > canvas.width) {
+    playerScore++;
+    resetBall();
+  }
+}
+
+function resetBall() {
+  ballX = canvas.width / 2;
+  ballY = canvas.height / 2;
+  ballSpeedX = -ballSpeedX;  // Change ball direction
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawRect(0, 0, canvas.width, canvas.height, '#000');  // Canvas background
+  drawRect(10, playerY, paddleWidth, paddleHeight, '#FFF');
+  drawRect(canvas.width - paddleWidth - 10, aiY, paddleWidth, paddleHeight, '#FFF');
+  drawCircle(ballX, ballY, ballRadius, '#FFF');
+  ctx.font = '30px Arial';
+  ctx.fillText(playerScore, canvas.width / 4, 50);
+  ctx.fillText(aiScore, canvas.width * 3 / 4, 50);
+
+  movePaddles();
+  moveBall();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowUp') upPressed = true;
+  if (e.key === 'ArrowDown') downPressed = true;
+});
+document.addEventListener('keyup', e => {
+  if (e.key === 'ArrowUp') upPressed = false;
+  if (e.key === 'ArrowDown') downPressed = false;
+});
+
+setInterval(draw, 1000 / 60);  // 60 FPS
+</script>

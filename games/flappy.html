@@ -1,0 +1,72 @@
+<canvas id="flappyCanvas" width="320" height="480"></canvas>
+<script>
+const canvas = document.getElementById('flappyCanvas');
+const ctx = canvas.getContext('2d');
+
+let birdY = canvas.height / 2;
+let birdVelocity = 0;
+let gravity = 0.5;
+let pipes = [];
+let pipeGap = 100;
+let pipeWidth = 40;
+let frameCount = 0;
+
+function drawBird() {
+  ctx.fillStyle = 'yellow';
+  ctx.fillRect(50, birdY, 20, 20);
+}
+
+function drawPipes() {
+  pipes.forEach(pipe => {
+    ctx.fillStyle = 'green';
+    ctx.fillRect(pipe.x, 0, pipeWidth, pipe.top);
+    ctx.fillRect(pipe.x, pipe.top + pipeGap, pipeWidth, canvas.height - pipe.top - pipeGap);
+  });
+}
+
+function updatePipes() {
+  pipes.forEach(pipe => {
+    pipe.x -= 2;
+  });
+
+  if (frameCount % 150 === 0) {
+    let pipeTopHeight = Math.random() * (canvas.height - pipeGap - 50) + 50;
+    pipes.push({ x: canvas.width, top: pipeTopHeight });
+  }
+
+  pipes = pipes.filter(pipe => pipe.x + pipeWidth > 0);
+}
+
+function collision() {
+  for (let i = 0; i < pipes.length; i++) {
+    if (pipes[i].x < 50 + 20 && pipes[i].x + pipeWidth > 50 &&
+        (birdY < pipes[i].top || birdY + 20 > pipes[i].top + pipeGap)) {
+      return true;
+    }
+  }
+  return birdY + 20 > canvas.height || birdY < 0;
+}
+
+function update() {
+  birdVelocity += gravity;
+  birdY += birdVelocity;
+
+  if (collision()) {
+    document.location.reload();
+  }
+
+  updatePipes();
+  frameCount++;
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawBird();
+  drawPipes();
+  update();
+}
+
+document.addEventListener('keydown', () => birdVelocity = -8);
+
+setInterval(draw, 1000 / 60);
+</script>

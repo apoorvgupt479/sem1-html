@@ -1,0 +1,91 @@
+<canvas id="spaceCanvas" width="600" height="400"></canvas>
+<script>
+const canvas = document.getElementById('spaceCanvas');
+const ctx = canvas.getContext('2d');
+
+let playerX = canvas.width / 2 - 25;
+let playerY = canvas.height - 30;
+let bullets = [];
+let enemies = [];
+let enemyDirection = 1;
+
+function drawPlayer() {
+  ctx.fillStyle = 'blue';
+  ctx.fillRect(playerX, playerY, 50, 20);
+}
+
+function drawEnemies() {
+  enemies.forEach(enemy => {
+    ctx.fillStyle = 'red';
+    ctx.fillRect(enemy.x, enemy.y, 40, 20);
+  });
+}
+
+function drawBullets() {
+  bullets.forEach(bullet => {
+    ctx.fillStyle = 'yellow';
+    ctx.fillRect(bullet.x, bullet.y, 5, 10);
+  });
+}
+
+function moveEnemies() {
+  enemies.forEach(enemy => enemy.x += enemyDirection);
+  if (enemies.length && (enemies[0].x < 0 || enemies[enemies.length - 1].x > canvas.width - 40)) {
+    enemyDirection *= -1;
+    enemies.forEach(enemy => enemy.y += 20);
+  }
+}
+
+function moveBullets() {
+  bullets.forEach(bullet => bullet.y -= 4);
+  bullets = bullets.filter(bullet => bullet.y > 0);
+}
+
+function collision(bullet, enemy) {
+  return bullet.x > enemy.x && bullet.x < enemy.x + 40 && bullet.y < enemy.y + 20 && bullet.y > enemy.y;
+}
+
+function updateGame() {
+  moveBullets();
+  moveEnemies();
+
+  bullets = bullets.filter(bullet => {
+    for (let i = 0; i < enemies.length; i++) {
+      if (collision(bullet, enemies[i])) {
+        enemies.splice(i, 1);
+        return false;
+      }
+    }
+    return true;
+  });
+
+  if (enemies.some(enemy => enemy.y + 20 > playerY)) {
+    document.location.reload();
+  }
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawPlayer();
+  drawBullets();
+  drawEnemies();
+  updateGame();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft' && playerX > 0) playerX -= 10;
+  if (e.key === 'ArrowRight' && playerX < canvas.width - 50) playerX += 10;
+  if (e.key === 'Space') bullets.push({ x: playerX + 22, y: playerY });
+});
+
+function createEnemies() {
+  for (let i = 0; i < 5; i++) {
+    for (let j = 0; j < 3; j++) {
+      enemies.push({ x: 60 * i + 10, y: 30 * j + 10 });
+    }
+  }
+}
+
+createEnemies();
+setInterval(draw, 1000 / 60);
+</script>

@@ -1,0 +1,69 @@
+<canvas id="froggerCanvas" width="400" height="400"></canvas>
+<script>
+const canvas = document.getElementById('froggerCanvas');
+const ctx = canvas.getContext('2d');
+
+let frog = { x: 190, y: 360, width: 20, height: 20 };
+let cars = [
+  { x: 0, y: 300, width: 60, height: 30, speed: 2 },
+  { x: 200, y: 250, width: 60, height: 30, speed: 3 },
+  { x: 100, y: 200, width: 60, height: 30, speed: 1.5 }
+];
+
+let gameOver = false;
+
+function drawFrog() {
+  ctx.fillStyle = 'green';
+  ctx.fillRect(frog.x, frog.y, frog.width, frog.height);
+}
+
+function drawCars() {
+  cars.forEach(car => {
+    ctx.fillStyle = 'red';
+    ctx.fillRect(car.x, car.y, car.width, car.height);
+    car.x += car.speed;
+    if (car.x > canvas.width) {
+      car.x = -car.width;
+    }
+  });
+}
+
+function checkCollision() {
+  for (let car of cars) {
+    if (frog.x < car.x + car.width && frog.x + frog.width > car.x &&
+        frog.y < car.y + car.height && frog.y + frog.height > car.y) {
+      gameOver = true;
+    }
+  }
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (!gameOver) {
+    drawFrog();
+    drawCars();
+    checkCollision();
+
+    if (frog.y < 0) {
+      ctx.font = '40px Arial';
+      ctx.fillText('You Win!', 120, 200);
+    } else {
+      requestAnimationFrame(draw);
+    }
+  } else {
+    ctx.font = '40px Arial';
+    ctx.fillText('Game Over', 100, 200);
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (gameOver) return;
+  if (e.key === 'ArrowUp') frog.y -= 20;
+  if (e.key === 'ArrowDown' && frog.y + frog.height < canvas.height) frog.y += 20;
+  if (e.key === 'ArrowLeft' && frog.x > 0) frog.x -= 20;
+  if (e.key === 'ArrowRight' && frog.x + frog.width < canvas.width) frog.x += 20;
+});
+
+draw();
+</script>
