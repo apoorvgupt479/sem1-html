@@ -1,117 +1,74 @@
-<canvas id="breakoutCanvas" width="480" height="320"></canvas>
-<script>
-const canvas = document.getElementById("breakoutCanvas");
-const ctx = canvas.getContext("2d");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArcBlaze Studios</title>
+    <link rel="stylesheet" href="/styles.css">
+    <base href="/sem1-html/">  <!-- for github hosting-->
+</head>
+<body>
+    <header>
+        <div id="logo">
+            <img src="/images/arcblaze.png" alt="ArcBlaze">
+            <b><nobr>Ignite your gaming experience</nobr></b>
+        </div>
+        <nobr><nav>
+            <div class="nav-item">
+                <a id="games" href="../home.html">Games</a>
+                <label for="games" class="pull-up-item-bkg"></label>
+            </div>
+            <div class="nav-item">
+                <a href="../about.html">About</a>
+                <div class="pull-up-item-bkg"></div>
+            </div>
+        </nav></nobr>
+    </header>
+<main id="game-main">
+  <canvas width="400" height="500" id="game"></canvas>
+  <script src="breakout.js"> </script>
+  <div class="description"> <!-- description -->
+    <h1>Breakout Game <span class="rating"><span class="rating-filled">★ ★ ★</span><span class="rating-empty"> ☆ ☆</span> (76)</span></h1>
+    <h4>About</h4>
+    <p>Breakout is an arcade video game developed and 
+      published by Atari, Inc. and released on May 13, 
+      1976.</p>
+    <p>Breakout was a worldwide commercial success, 
+      among the top five highest-grossing arcade video 
+      games of 1976 in both the United States and Japan
+       and then among the top three highest-grossing
+       arcade video games of 1977 in the US and Japan.</p>
+    <h4>Controls</h4>
+    <ul>
+      <li>Move paddle: Arrow keys</li>
+      <li>Release Ball: X</li>
+    </ul>
+    <h4>Objective</h4>
+    <p>In Breakout, a layer of bricks lines the top 
+      third of the screen and the goal is to destroy
+       them all by repeatedly bouncing a ball off a 
+       paddle into them.</p>
+  </div>
+</main>
 
-let ballRadius = 10;
-let x = canvas.width / 2;
-let y = canvas.height - 30;
-let dx = 2;
-let dy = -2;
-let paddleHeight = 10;
-let paddleWidth = 75;
-let paddleX = (canvas.width - paddleWidth) / 2;
-let rightPressed = false;
-let leftPressed = false;
-let brickRowCount = 3;
-let brickColumnCount = 5;
-let brickWidth = 75;
-let brickHeight = 20;
-let brickPadding = 10;
-let brickOffsetTop = 30;
-let brickOffsetLeft = 30;
+<footer>
+  <h1><center>Suggest new games</center></h1>
+  <form action="">
+      <div class="form-col">
+          <input type="email" name="email" placeholder="Your E-mail">
+          <input type="text" name="game" placeholder="Game Name">
+      </div>            
+      <textarea name="description" id="game-description" placeholder="Description for the game"></textarea>
+      <button class="btn" id="submit" type="submit">Submit</button>
+  </form>
+  <br>
+  <br>
+  <br>
+  <div id="copyright-parent">
+      <p id="copyright">&copy;2024, ArcBlaze Studios</p>
+  </div>
+</footer>
+</body>
+</html>
 
-let bricks = [];
-for (let c = 0; c < brickColumnCount; c++) {
-  bricks[c] = [];
-  for (let r = 0; r < brickRowCount; r++) {
-    bricks[c][r] = { x: 0, y: 0, status: 1 };
-  }
-}
 
-function drawBall() {
-  ctx.beginPath();
-  ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-  ctx.fillStyle = "#0095DD";
-  ctx.fill();
-  ctx.closePath();
-}
-
-function drawPaddle() {
-  ctx.beginPath();
-  ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
-  ctx.fillStyle = "#0095DD";
-  ctx.fill();
-  ctx.closePath();
-}
-
-function drawBricks() {
-  for (let c = 0; c < brickColumnCount; c++) {
-    for (let r = 0; r < brickRowCount; r++) {
-      if (bricks[c][r].status === 1) {
-        let brickX = c * (brickWidth + brickPadding) + brickOffsetLeft;
-        let brickY = r * (brickHeight + brickPadding) + brickOffsetTop;
-        bricks[c][r].x = brickX;
-        bricks[c][r].y = brickY;
-        ctx.beginPath();
-        ctx.rect(brickX, brickY, brickWidth, brickHeight);
-        ctx.fillStyle = "#0095DD";
-        ctx.fill();
-        ctx.closePath();
-      }
-    }
-  }
-}
-
-function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  drawBricks();
-  drawBall();
-  drawPaddle();
-
-  if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
-    dx = -dx;
-  }
-  if (y + dy < ballRadius) {
-    dy = -dy;
-  } else if (y + dy > canvas.height - ballRadius) {
-    if (x > paddleX && x < paddleX + paddleWidth) {
-      dy = -dy;
-    } else {
-      document.location.reload();
-    }
-  }
-
-  x += dx;
-  y += dy;
-
-  if (rightPressed && paddleX < canvas.width - paddleWidth) {
-    paddleX += 7;
-  } else if (leftPressed && paddleX > 0) {
-    paddleX -= 7;
-  }
-
-  requestAnimationFrame(draw);
-}
-
-document.addEventListener("keydown", keyDownHandler);
-document.addEventListener("keyup", keyUpHandler);
-
-function keyDownHandler(e) {
-  if (e.key === "Right" || e.key === "ArrowRight") {
-    rightPressed = true;
-  } else if (e.key === "Left" || e.key === "ArrowLeft") {
-    leftPressed = true;
-  }
-}
-
-function keyUpHandler(e) {
-  if (e.key === "Right" || e.key === "ArrowRight") {
-    rightPressed = false;
-  } else if (e.key === "Left" || e.key === "ArrowLeft") {
-    leftPressed = false;
-  }
-}
-
-draw();
-</script>

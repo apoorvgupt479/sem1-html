@@ -3,8 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ArcBlaze Entertainment</title>
+    <title>ArcBlaze Studios</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        h1{
+            margin: 2%;
+        }
+        p,li{
+            font-size: 18px;
+            text-indent: 5%;
+            font-stretch:expanded;
+            line-height: 25px;
+            margin: 3px;
+            margin: 3%;
+        }
+        li{
+            text-indent: 0%;
+        }
+    </style>
+    <base href="/sem1-html/">  <!-- for github hosting-->
 </head>
 <body>
     <header>
@@ -14,7 +31,7 @@
         </div>
         <nobr><nav>
             <div class="nav-item">
-                <a id="games" href="games.html">Games</a>
+                <a id="games" href="home.html">Games</a>
                 <label for="games" class="pull-up-item-bkg"></label>
             </div>
             <div class="nav-item">
@@ -23,11 +40,75 @@
             </div>
         </nav></nobr>
     </header>
-    <main>
-        <section>
-            
-        </section>
-    </main>
 
+    <h1>Who are we?</h1>
+    <p>Welcome to ArcBlaze, your ultimate destination for classic arcade games! 🌟</p> 
+    <p>
+        At ArcBlaze, we bring back the timeless fun of arcade gaming directly to your browser. 
+        Our platform is packed with a variety of retro-inspired games, from the endless 
+        thrill of Snake to the strategic moves of Tic-Tac-Toe. With ArcBlaze, there’s no 
+        need to download apps or create accounts — just visit our site, pick a game, and 
+        start playing instantly!
+    </p>
+    <h1>Our Mission</h1>
+    <p>
+        ArcBlaze was created to make classic arcade games easily accessible to everyone. 
+        We believe that gaming should be simple, fun, and available anytime, anywhere. 
+        Our mission is to provide a nostalgic experience for seasoned gamers while 
+        introducing new players to the charm of retro gaming. Whether you're looking 
+        for a quick break or an extended gaming session, ArcBlaze is here to ignite your 
+        gaming spirit! 🔥
+    </p>
+    <h1>What We Offer</h1>
+    <ul>
+        <li>
+            <b>A Curated Selection of Arcade Classics: </b> 
+            From Pong to Space Invaders, 
+            we host a growing collection of beloved arcade games. Each game is 
+            carefully crafted with HTML5 Canvas and JavaScript to deliver a 
+            smooth, engaging experience.
+        </li>
+        <li>
+            <b>Instant Play: </b>
+            No registration, no downloads, and no hassle. Just click and play!
+        </li>
+        <li>
+            <b>Multi-Device Compatibility: </b>
+            ArcBlaze is optimized for desktops, tablets, and smartphones, 
+            so you can enjoy your favorite games wherever you are.
+        </li>
+        <li>
+            <b>Constantly Expanding Library: </b>
+            We’re always looking to add more games to our lineup. 
+            Stay tuned for new releases and updates!
+        </li>
+    </ul>
+    <h1>Why ArcBlaze?</h1>
+    <p>
+        ArcBlaze is more than just a gaming website; it’s a 
+        celebration of gaming history. We’re here to keep the 
+        spirit of arcade games alive for a new generation while 
+        letting long-time fans relive the classics they grew up with. 
+        So dive into ArcBlaze and experience the joy of arcade gaming 
+        like never before!
+    </p>
+
+    <footer>
+        <h1><center>Suggest new games</center></h1>
+        <form action="">
+            <div class="form-col">
+                <input type="email" name="email" placeholder="Your E-mail">
+                <input type="text" name="game" placeholder="Game Name">
+            </div>            
+            <textarea name="description" id="game-description" placeholder="Description for the game"></textarea>
+            <button class="btn" id="submit" type="submit">Submit</button>
+        </form>
+        <br>
+        <br>
+        <br>
+        <div id="copyright-parent">
+            <p id="copyright">&copy;2024, ArcBlaze Studios</p>
+        </div>
+    </footer>
 </body>
 </html>

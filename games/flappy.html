@@ -1,3 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArcBlaze Studios</title>
+    <link rel="stylesheet" href="/styles.css">
+    <base href="/sem1-html/">  <!-- for github hosting-->
+</head>
+<body>
+    <header>
+        <div id="logo">
+            <img src="/images/arcblaze.png" alt="ArcBlaze">
+            <b><nobr>Ignite your gaming experience</nobr></b>
+        </div>
+        <nobr><nav>
+            <div class="nav-item">
+                <a id="games" href="../home.html">Games</a>
+                <label for="games" class="pull-up-item-bkg"></label>
+            </div>
+            <div class="nav-item">
+                <a href="../about.html">About</a>
+                <div class="pull-up-item-bkg"></div>
+            </div>
+        </nav></nobr>
+    </header>
+<main id="game-main">
+  <canvas id="flappyCanvas" width="320" height="480"></canvas>
+  <script src="flappy.js"> </script>
+  <div class="description"> <!-- description -->
+    <h1>Flappy Bird <span class="rating"><span class="rating-filled">★ ★ ★</span><span class="rating-empty"> ☆ ☆</span> (98)</span></h1>
+    <h4>About</h4>
+    <p>Flappy Bird is a 2013 casual mobile game developed by Vietnamese video game 
+      artist and programmer Dong Nguyen, under his game development 
+      company.
+      </p>
+    <p>The game was released in May 2013 but received a sudden spike in popularity 
+      in early 2014, becoming a sleeper hit. </p>
+    <h4>Controls</h4>
+    <ul>
+      <li>Bird Fly: X</li>
+      <li>Restart: Z</li>
+    </ul>
+    <h4>Objective</h4>
+    <p>The game is a side-scroller where the player controls a
+      bird, Faby, attempting to fly between columns of green pipes without hitting 
+      them. The player's score is determined by the number of pipes they pass.</p>
+  </div>
+</main>
+
+<footer>
+  <h1><center>Suggest new games</center></h1>
+  <form action="">
+      <div class="form-col">
+          <input type="email" name="email" placeholder="Your E-mail">
+          <input type="text" name="game" placeholder="Game Name">
+      </div>            
+      <textarea name="description" id="game-description" placeholder="Description for the game"></textarea>
+      <button class="btn" id="submit" type="submit">Submit</button>
+  </form>
+  <br>
+  <br>
+  <br>
+  <div id="copyright-parent">
+      <p id="copyright">&copy;2024, ArcBlaze Studios</p>
+  </div>
+</footer>
+</body>
+</html>
+
+
+
+
+
+<!-- 
+
 <canvas id="flappyCanvas" width="320" height="480"></canvas>
 <script>
 const canvas = document.getElementById('flappyCanvas');
@@ -69,4 +145,4 @@ function draw() {
 document.addEventListener('keydown', () => birdVelocity = -8);
 
 setInterval(draw, 1000 / 60);
-</script>
+</script> -->

@@ -1,91 +1,77 @@
-<canvas id="spaceCanvas" width="600" height="400"></canvas>
-<script>
-const canvas = document.getElementById('spaceCanvas');
-const ctx = canvas.getContext('2d');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArcBlaze Studios</title>
+    <link rel="stylesheet" href="/styles.css">
+    <base href="/sem1-html/">  <!-- for github hosting-->
+</head>
+<body>
+    <header>
+        <div id="logo">
+            <img src="/images/arcblaze.png" alt="ArcBlaze">
+            <b><nobr>Ignite your gaming experience</nobr></b>
+        </div>
+        <nobr><nav>
+            <div class="nav-item">
+                <a id="games" href="../home.html">Games</a>
+                <label for="games" class="pull-up-item-bkg"></label>
+            </div>
+            <div class="nav-item">
+                <a href="../about.html">About</a>
+                <div class="pull-up-item-bkg"></div>
+            </div>
+        </nav></nobr>
+    </header>
+<main id="game-main">
+  <canvas id="spaceCanvas" width="600" height="400"></canvas>
+  <script src="space.js"></script>
 
-let playerX = canvas.width / 2 - 25;
-let playerY = canvas.height - 30;
-let bullets = [];
-let enemies = [];
-let enemyDirection = 1;
+  <div class="description"> <!-- description -->
+    <h1>Space Shooter Game <span class="rating"><span class="rating-filled">★ ★ ★ ★ ★</span><span class="rating-empty"></span> (91)</span></h1>
+    <h4>About</h4>
+    <p>Space Shooter is a 1978 shoot 'em up arcade video game developed and published by Taito.</p>
+    <p>Commonly considered to be one of the most influential video games of all time, Space 
+      Invaders was the first fixed shooter and the first video 
+      game with endless gameplay (meaning there was no final level or endscreen) and 
+      set the template for the genre. </p>
+    <h4>Controls</h4>
+    <ul>
+      <li>Start: Enter key</li>
+      <li>Move ship: Arrow keys</li>
+      <li>Shoot: X</li>
+    </ul>
+    <h4>Objective</h4>
+    <p>In Breakout, a layer of bricks lines the top 
+      third of the screen and the goal is to destroy
+       them all by repeatedly bouncing a ball off a 
+       paddle into them.</p>
+  </div>
+</main>
 
-function drawPlayer() {
-  ctx.fillStyle = 'blue';
-  ctx.fillRect(playerX, playerY, 50, 20);
-}
+<footer>
+  <h1><center>Suggest new games</center></h1>
+  <form action="">
+      <div class="form-col">
+          <input type="email" name="email" placeholder="Your E-mail">
+          <input type="text" name="game" placeholder="Game Name">
+      </div>            
+      <textarea name="description" id="game-description" placeholder="Description for the game"></textarea>
+      <button class="btn" id="submit" type="submit">Submit</button>
+  </form>
+  <br>
+  <br>
+  <br>
+  <div id="copyright-parent">
+      <p id="copyright">&copy;2024, ArcBlaze Studios</p>
+  </div>
+</footer>
+</body>
+</html>
 
-function drawEnemies() {
-  enemies.forEach(enemy => {
-    ctx.fillStyle = 'red';
-    ctx.fillRect(enemy.x, enemy.y, 40, 20);
-  });
-}
 
-function drawBullets() {
-  bullets.forEach(bullet => {
-    ctx.fillStyle = 'yellow';
-    ctx.fillRect(bullet.x, bullet.y, 5, 10);
-  });
-}
 
-function moveEnemies() {
-  enemies.forEach(enemy => enemy.x += enemyDirection);
-  if (enemies.length && (enemies[0].x < 0 || enemies[enemies.length - 1].x > canvas.width - 40)) {
-    enemyDirection *= -1;
-    enemies.forEach(enemy => enemy.y += 20);
-  }
-}
 
-function moveBullets() {
-  bullets.forEach(bullet => bullet.y -= 4);
-  bullets = bullets.filter(bullet => bullet.y > 0);
-}
 
-function collision(bullet, enemy) {
-  return bullet.x > enemy.x && bullet.x < enemy.x + 40 && bullet.y < enemy.y + 20 && bullet.y > enemy.y;
-}
 
-function updateGame() {
-  moveBullets();
-  moveEnemies();
-
-  bullets = bullets.filter(bullet => {
-    for (let i = 0; i < enemies.length; i++) {
-      if (collision(bullet, enemies[i])) {
-        enemies.splice(i, 1);
-        return false;
-      }
-    }
-    return true;
-  });
-
-  if (enemies.some(enemy => enemy.y + 20 > playerY)) {
-    document.location.reload();
-  }
-}
-
-function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  drawPlayer();
-  drawBullets();
-  drawEnemies();
-  updateGame();
-}
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowLeft' && playerX > 0) playerX -= 10;
-  if (e.key === 'ArrowRight' && playerX < canvas.width - 50) playerX += 10;
-  if (e.key === 'Space') bullets.push({ x: playerX + 22, y: playerY });
-});
-
-function createEnemies() {
-  for (let i = 0; i < 5; i++) {
-    for (let j = 0; j < 3; j++) {
-      enemies.push({ x: 60 * i + 10, y: 30 * j + 10 });
-    }
-  }
-}
-
-createEnemies();
-setInterval(draw, 1000 / 60);
-</script>

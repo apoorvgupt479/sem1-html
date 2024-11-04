@@ -1,4 +1,78 @@
-<canvas id="pongCanvas" width="800" height="400"></canvas>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArcBlaze Studios</title>
+    <link rel="stylesheet" href="/styles.css">
+    <base href="/sem1-html/">  <!-- for github hosting-->
+</head>
+<body>
+    <header>
+        <div id="logo">
+            <img src="/images/arcblaze.png" alt="ArcBlaze">
+            <b><nobr>Ignite your gaming experience</nobr></b>
+        </div>
+        <nobr><nav>
+            <div class="nav-item">
+                <a id="games" href="../home.html">Games</a>
+                <label for="games" class="pull-up-item-bkg"></label>
+            </div>
+            <div class="nav-item">
+                <a href="../about.html">About</a>
+                <div class="pull-up-item-bkg"></div>
+            </div>
+        </nav></nobr>
+    </header>
+<main id="game-main">
+  <canvas id="pongCanvas" width="800" height="400"></canvas>
+  <script src="pong.js"> </script>
+  <div class="description"> <!-- description -->
+    <h1>Pong Game<span class="rating"><span class="rating-filled">★ ★ ★ ★ </span><span class="rating-empty">☆</span> (45)</span></h1>
+    <h4>About</h4>
+    <p>Pong is a table tennis–themed twitch arcade sports video game,
+       featuring simple two-dimensional graphics, manufactured by Atari 
+       and originally released on 29 November 1972. It is one of the 
+       earliest arcade video games.</p>
+    <p>The Pong arcade games manufactured by Atari were a great success. 
+      Pong consistently earned four times more revenue than other coin-operated machines.</p>
+    <h4>Controls</h4>
+    <ul>
+      <li>Move paddle: W , S</li>
+      <li>Restart: X</li>
+    </ul>
+    <h4>Objective</h4>
+    <p>The goal is for each player to reach eleven points before the opponent;
+       points are earned when one fails to return the ball to the other.</p>
+  </div>
+</main>
+
+<footer>
+  <h1><center>Suggest new games</center></h1>
+  <form action="">
+      <div class="form-col">
+          <input type="email" name="email" placeholder="Your E-mail">
+          <input type="text" name="game" placeholder="Game Name">
+      </div>            
+      <textarea name="description" id="game-description" placeholder="Description for the game"></textarea>
+      <button class="btn" id="submit" type="submit">Submit</button>
+  </form>
+  <br>
+  <br>
+  <br>
+  <div id="copyright-parent">
+      <p id="copyright">&copy;2024, ArcBlaze Studios</p>
+  </div>
+</footer>
+</body>
+</html>
+
+
+
+
+
+
+<!-- <canvas id="pongCanvas" width="800" height="400"></canvas>
 <script>
 const canvas = document.getElementById('pongCanvas');
 const ctx = canvas.getContext('2d');
@@ -86,4 +160,4 @@ document.addEventListener('keyup', e => {
 });
 
 setInterval(draw, 1000 / 60);  // 60 FPS
-</script>
+</script> -->
