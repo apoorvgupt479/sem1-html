@@ -4,29 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ArcBlaze Studios</title>
-    <base href="/sem1-html/">  <!-- for github hosting-->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles.css">
+    <!-- <base href="/sem1-html/"> -->  <!-- for github hosting-->
 </head>
 <body>
     <header>
         <div id="logo">
-            <img src="images/arcblaze.png" alt="ArcBlaze">
+            <img src="/images/arcblaze.png" alt="ArcBlaze">
             <b><nobr>Ignite your gaming experience</nobr></b>
         </div>
         <nobr><nav>
             <div class="nav-item">
-                <a id="games" href="/home.html">Games</a>
+                <a id="games" href="../home.html">Games</a>
                 <label for="games" class="pull-up-item-bkg"></label>
             </div>
             <div class="nav-item">
-                <a href="/about.html">About</a>
+                <a href="../about.html">About</a>
                 <div class="pull-up-item-bkg"></div>
             </div>
         </nav></nobr>
     </header>
 <main id="game-main">
   <canvas id="flappyCanvas" width="320" height="480"></canvas>
-  <script src="games/flappy.js"> </script>
+  <script src="flappy.js"> </script>
   <div class="description"> <!-- description -->
     <h1>Flappy Bird <span class="rating"><span class="rating-filled">★ ★ ★</span><span class="rating-empty"> ☆ ☆</span> (98)</span></h1>
     <h4>About</h4>
