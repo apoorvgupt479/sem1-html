@@ -4,71 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ArcBlaze Studios</title>
-    <link rel="stylesheet" href="/styles.css">
-    <!-- <base href="/sem1-html/"> -->  <!-- for github hosting-->
+    <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
     <header>
         <div id="logo">
-            <img src="/images/arcblaze.png" alt="ArcBlaze">
+            <img src="../images/arcblaze.png" alt="ArcBlaze">
             <b><nobr>Ignite your gaming experience</nobr></b>
         </div>
-        <nobr><nav>
-            <div class="nav-item">
-                <a id="games" href="../home.html">Games</a>
-                <label for="games" class="pull-up-item-bkg"></label>
-            </div>
-            <div class="nav-item">
-                <a href="../about.html">About</a>
-                <div class="pull-up-item-bkg"></div>
-            </div>
-        </nav></nobr>
+        <nobr>
+            <nav>
+                <div class="nav-item">
+                    <a id="games" href="../home.html">Games</a>
+                    <label for="games" class="pull-up-item-bkg"></label>
+                </div>
+                <div class="nav-item">
+                    <a href="../about.html">About</a>
+                    <div class="pull-up-item-bkg"></div>
+                </div>
+            </nav>
+        </nobr>
     </header>
-<main id="game-main">
-  <canvas width="400" height="500" id="game"></canvas>
-  <script src="breakout.js"> </script>
-  <div class="description"> <!-- description -->
-    <h1>Breakout Game <span class="rating"><span class="rating-filled">★ ★ ★</span><span class="rating-empty"> ☆ ☆</span> (76)</span></h1>
-    <h4>About</h4>
-    <p>Breakout is an arcade video game developed and 
-      published by Atari, Inc. and released on May 13, 
-      1976.</p>
-    <p>Breakout was a worldwide commercial success, 
-      among the top five highest-grossing arcade video 
-      games of 1976 in both the United States and Japan
-       and then among the top three highest-grossing
-       arcade video games of 1977 in the US and Japan.</p>
-    <h4>Controls</h4>
-    <ul>
-      <li>Move paddle: Arrow keys</li>
-      <li>Release Ball: X</li>
-    </ul>
-    <h4>Objective</h4>
-    <p>In Breakout, a layer of bricks lines the top 
-      third of the screen and the goal is to destroy
-       them all by repeatedly bouncing a ball off a 
-       paddle into them.</p>
-  </div>
-</main>
-
-<footer>
-  <h1><center>Suggest new games</center></h1>
-  <form action="">
-      <div class="form-col">
-          <input type="email" name="email" placeholder="Your E-mail">
-          <input type="text" name="game" placeholder="Game Name">
-      </div>            
-      <textarea name="description" id="game-description" placeholder="Description for the game"></textarea>
-      <button class="btn" id="submit" type="submit">Submit</button>
-  </form>
-  <br>
-  <br>
-  <br>
-  <div id="copyright-parent">
-      <p id="copyright">&copy;2024, ArcBlaze Studios</p>
-  </div>
-</footer>
+    <main id="game-main">
+        <canvas width="400" height="500" id="game"></canvas>
+        <script src="breakout.js"></script>
+        <div class="description">
+            <h1>Breakout Game <span class="rating"><span class="rating-filled">★ ★ ★</span><span class="rating-empty"> ☆ ☆</span> (76)</span></h1>
+            <h4>About</h4>
+            <p>Breakout is an arcade video game developed and published by Atari, Inc. and released on May 13, 1976.</p>
+            <p>Breakout was a worldwide commercial success, among the top five highest-grossing arcade video games of 1976 in both the United States and Japan and then among the top three highest-grossing arcade video games of 1977 in the US and Japan.</p>
+            <h4>Controls</h4>
+            <ul>
+                <li>Move paddle: Arrow keys</li>
+                <li>Release Ball: X</li>
+            </ul>
+            <h4>Objective</h4>
+            <p>In Breakout, a layer of bricks lines the top third of the screen and the goal is to destroy them all by repeatedly bouncing a ball off a paddle into them.</p>
+        </div>
+    </main>
+    <footer>
+        <h1><center>Suggest new games</center></h1>
+        <form action="">
+            <div class="form-col">
+                <input type="email" name="email" placeholder="Your E-mail">
+                <input type="text" name="game" placeholder="Game Name">
+            </div>
+            <textarea name="description" id="game-description" placeholder="Description for the game"></textarea>
+            <button class="btn" id="submit" type="submit">Submit</button>
+        </form>
+        <br><br><br>
+        <div id="copyright-parent">
+            <p id="copyright">&copy;2024, ArcBlaze Studios</p>
+        </div>
+    </footer>
 </body>
 </html>
-
-
