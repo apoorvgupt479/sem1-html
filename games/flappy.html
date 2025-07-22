@@ -4,29 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ArcBlaze Studios</title>
-    <link rel="stylesheet" href="/styles.css">
+    <!-- Use relative path for CSS -->
+    <link rel="stylesheet" href="../styles.css">
     <!-- <base href="/sem1-html/"> -->  <!-- for github hosting-->
 </head>
 <body>
     <header>
         <div id="logo">
-            <img src="/images/arcblaze.png" alt="ArcBlaze">
+            <!-- Use relative path for image -->
+            <img src="../images/arcblaze.png" alt="ArcBlaze">
             <b><nobr>Ignite your gaming experience</nobr></b>
         </div>
-        <nobr><nav>
-            <div class="nav-item">
-                <a id="games" href="../home.html">Games</a>
-                <label for="games" class="pull-up-item-bkg"></label>
-            </div>
-            <div class="nav-item">
-                <a href="../about.html">About</a>
-                <div class="pull-up-item-bkg"></div>
-            </div>
-        </nav></nobr>
+        <nobr>
+            <nav>
+                <div class="nav-item">
+                    <a id="games" href="../home.html">Games</a>
+                    <label for="games" class="pull-up-item-bkg"></label>
+                </div>
+                <div class="nav-item">
+                    <a href="../about.html">About</a>
+                    <div class="pull-up-item-bkg"></div>
+                </div>
+            </nav>
+        </nobr>
     </header>
 <main id="game-main">
   <canvas id="flappyCanvas" width="320" height="480"></canvas>
-  <script src="flappy.js"> </script>
+  <!-- Use relative path for JS -->
+  <script src="flappy.js"></script>
   <div class="description"> <!-- description -->
     <h1>Flappy Bird <span class="rating"><span class="rating-filled">★ ★ ★</span><span class="rating-empty"> ☆ ☆</span> (98)</span></h1>
     <h4>About</h4>
@@ -67,82 +72,3 @@
 </footer>
 </body>
 </html>
-
-
-
-
-
-<!-- 
-
-<canvas id="flappyCanvas" width="320" height="480"></canvas>
-<script>
-const canvas = document.getElementById('flappyCanvas');
-const ctx = canvas.getContext('2d');
-
-let birdY = canvas.height / 2;
-let birdVelocity = 0;
-let gravity = 0.5;
-let pipes = [];
-let pipeGap = 100;
-let pipeWidth = 40;
-let frameCount = 0;
-
-function drawBird() {
-  ctx.fillStyle = 'yellow';
-  ctx.fillRect(50, birdY, 20, 20);
-}
-
-function drawPipes() {
-  pipes.forEach(pipe => {
-    ctx.fillStyle = 'green';
-    ctx.fillRect(pipe.x, 0, pipeWidth, pipe.top);
-    ctx.fillRect(pipe.x, pipe.top + pipeGap, pipeWidth, canvas.height - pipe.top - pipeGap);
-  });
-}
-
-function updatePipes() {
-  pipes.forEach(pipe => {
-    pipe.x -= 2;
-  });
-
-  if (frameCount % 150 === 0) {
-    let pipeTopHeight = Math.random() * (canvas.height - pipeGap - 50) + 50;
-    pipes.push({ x: canvas.width, top: pipeTopHeight });
-  }
-
-  pipes = pipes.filter(pipe => pipe.x + pipeWidth > 0);
-}
-
-function collision() {
-  for (let i = 0; i < pipes.length; i++) {
-    if (pipes[i].x < 50 + 20 && pipes[i].x + pipeWidth > 50 &&
-        (birdY < pipes[i].top || birdY + 20 > pipes[i].top + pipeGap)) {
-      return true;
-    }
-  }
-  return birdY + 20 > canvas.height || birdY < 0;
-}
-
-function update() {
-  birdVelocity += gravity;
-  birdY += birdVelocity;
-
-  if (collision()) {
-    document.location.reload();
-  }
-
-  updatePipes();
-  frameCount++;
-}
-
-function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  drawBird();
-  drawPipes();
-  update();
-}
-
-document.addEventListener('keydown', () => birdVelocity = -8);
-
-setInterval(draw, 1000 / 60);
-</script> -->
